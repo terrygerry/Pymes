@@ -57,7 +57,7 @@ function processFiles(files) {
                
     <!-----------------------PONER CODIGO A PARTIR DE AQUI ---------------------------- -->
     
-    <s:form id=""  method="post"  action="registrarBienes" 
+    <s:form id=""  method="post"  action="" 
 			theme="bootstrap" cssClass="form-horizontal">
 			<label class="col-lg-3 control-label">Tipo de Bien</label>
 				<div class="col-lg-7 selectpicker" >
@@ -67,8 +67,8 @@ function processFiles(files) {
 						headerValue="[Seleccione]" id="cboTipoActivo" >
 					</s:select>
 				</div>
-					<button  type="button" id="btnNuevo" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onchange="de()">NUEVO</button>
-				
+				<button  type="button" id="btnNuevo" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onchange="de()">NUEVO</button>
+		
 	</s:form>
 	<div class="container">
   <!-- Modal -->
@@ -118,14 +118,8 @@ function processFiles(files) {
 				                                    <s:textfield 	name="activo.responsable" id="txtResponsable" />
 				                                </div>
 				   								<label class="col-lg-3 control-label">Proveedor</label>
-				                                <div class="col-lg-7">
-				                                    <s:select 	name="activo.idproveedor" id="cboProveedor"
-														list="listaProveedor"
-														listKey="codPro"
-														listValue="nomPro"
-														headerKey=""
-														headerValue="[Seleccione]" cssStyle="width:200px">
-													</s:select>
+				   								<div class="col-lg-7">
+				                                    <s:textfield 	name="activo.idproveedor" id="txtProveedor" />
 				                                </div>
 				                                <label class="col-lg-3 control-label">Marca</label>
 				                                <div class="col-lg-7">
@@ -271,17 +265,12 @@ function processFiles(files) {
 <!--                     <a href="listBienes.jsp"><img src="images/volver.jpg" width="45px"/></a> -->
 <!--                 </div> -->
 <!--         <div class="row"> -->
-            <!-- form: -->
-            <section>
-               <div class="col-lg-8 col-lg-offset-2">          
+            <!-- form: -->    
       
                  
                     
     <!-----------------------------------------TERMINA CODIGO HASTA AQUI ---------------------------- -->
-                </div>
-            </section>
             <!-- :form -->
-            <s:form>
             	<div class="panel-body">
                        
                       <div class="dataTable_wrapper">
@@ -386,14 +375,15 @@ function processFiles(files) {
                             </div>
                     
                     </div>
-            </s:form>
+                    
+                    
+                    
         </div>
         
         
-    </div>
+    	</div>
     </div>
     
-    </div>
     
     
      

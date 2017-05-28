@@ -20,17 +20,24 @@ public class ActivoAction extends ActionSupport {
 	private List<ProveedorDTO> listaProveedor;
 	private ActivoDTO activo;
 	
-	@Action(value="/listaProveedor",results={@Result(name="ok",location="/Registrar_Activo.jsp")})
-	public String listaProveedor(){
-		listaProveedor=new ActivoService().listaProveedor();
+//	@Action(value="/listaProveedor",results={@Result(name="ok",location="/Registrar_Activo.jsp")})
+//	public String listaProveedor(){
+//		listaProveedor=new ActivoService().listaProveedor();
+//		return "ok";
+//	}
+	
+	@Action(value="/listarActivoBus",results={@Result(name="ok",location="/Buscar_Activo.jsp")})
+	public String listarActivoBus(){
+		listaActivo();
 		return "ok";
 	}
 	
-	@Action(value="/listarActivo",results={@Result(name="ok",location="/Buscar_Activo.jsp")})
+	@Action(value="/listarActivo",results={@Result(name="ok",location="/Registrar_Activo.jsp")})
 	public String listarActivo(){
 		listaActivo();
 		return "ok";
 	}
+	
 	
 	@Action(value="/registrarActivo",results={@Result(name="ok",location="/Buscar_Activo.jsp")})
 	public String registraActivo() throws IOException{
