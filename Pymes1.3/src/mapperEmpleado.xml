@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dawi">
+	<select id="idListaEmpleado" resultType="EmpleadoDTOIbatis">
+		SELECT
+		e.cod_emp as codigo,
+		e.nom_emp as nombre,
+		e.ape_emp as apellido,
+		e.sex_emp as sexo,
+		e.dni_emp as dni,
+		e.car_emp as cargo,
+		e.fec_nac_emp as fechaNacimiento,
+		e.fec_reg_emp as fechaRegistro,
+		s.nom_sucursal as nomSucursal
+		FROM
+		tb_empleado e join tb_sucursal s
+		on e.cod_sucursal_emp=s.cod_sucursal
+	</select>
+	<select id="idBuscarEmpleado" resultType="EmpleadoDTOIbatis" parameterType="int">
+		SELECT
+		e.cod_emp as codigo,
+		e.nom_emp as nombre,
+		e.ape_emp as apellido,
+		e.sex_emp as sexo,
+		e.dni_emp as dni,
+		e.car_emp as cargo,
+		e.fec_nac_emp as fechaNacimiento,
+		e.fec_reg_emp as fechaRegistro,
+		e.cod_sucursal_emp as codSucursal
+		FROM
+		tb_empleado e join tb_sucursal s
+		on e.cod_sucursal_emp=s.cod_sucursal where e.cod_emp=#{codigo}
+	</select>	
+	<insert id="idInsertaEmpleado" parameterType="EmpleadoDTOIbatis">
+		INSERT INTO TB_EMPLEADO
+			VALUES(null,#{nombre},#{apellido},#{sexo},#{dni},#{cargo},#{fechaNacimiento},
+			#{fechaRegistro},#{codSucursal},#{FotoBytes},#{FotoFileName})
+	</insert>
+	<update id="idActualizaEmpleado" parameterType="EmpleadoDTOIbatis">
+		UPDATE TB_EMPLEADO SET
+		nom_emp =#{nombre},
+		ape_emp =#{apellido},
+		sex_emp =#{sexo},
+		dni_emp =#{dni},
+		car_emp =#{cargo},
+		fec_nac_emp =#{fechaNacimiento},
+		fec_reg_emp =#{fechaRegistro},
+		cod_sucursal_emp=#{codSucursal}, Foto=#{FotoBytes}, nomFoto=#{FotoFileName} 
+		WHERE
+		cod_emp =#{codigo}
+	</update>
+	<delete id="idEliminaEmpleado" parameterType="int">
+		DELETE FROM TB_EMPLEADO
+		WHERE cod_emp = #{codigo}
+	</delete>
+	<select id="idObtieneEmpleado" resultType="EmpleadoDTOIbatis"
+		parameterType="int">
+		SELECT
+		foto AS FotoBytes
+		FROM
+		tb_empleado
+		WHERE
+		cod_emp = #{codigo}
+	</select>
+	
+</mapper>
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="EmpleadoDTOIbatis" type="beans.EmpleadoDTO" />
+		<typeAlias alias="SucursalDTOIbatis" type="beans.SucursalDTO" />
+		<typeAlias alias="ClienteDTOIbatis" type="beans.ClienteDTO" />
+		<typeAlias alias="UsuarioDTOIbatis" type="beans.UsuarioDTO" />
+		<typeAlias alias="EnlaceDTOIbatis" type="beans.EnlaceDTO" />
+		<typeAlias alias="MarcaDTOIbatis" type="beans.MarcaDTO" />
+		<typeAlias alias="CategoriaDTOIbatis" type="beans.CategoriaDTO" />
+		<typeAlias alias="ProductoDTOIbatis" type="beans.ProductoDTO" />
+		
+		<typeAlias alias="ActivoDTOIbatis" type="beans.ActivoDTO" />
+		<typeAlias alias="ProveedorDTOIbatis" type="beans.ProveedorDTO" />
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/proyectoIntegrador" />
+				<property name="username" value="root" />
+				<property name="password" value="root" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="mapperSucursal.xml" />
+		<mapper resource="mapperEmpleado.xml" />
+		<mapper resource="mapperCliente.xml" />
+		<mapper resource="mapperUsuario.xml" />
+		<mapper resource="mapperMarca.xml" />
+		<mapper resource="mapperCategoria.xml" />
+		<mapper resource="mapperActivo.xml" />
+		<mapper resource="mapperProveedor.xml" />
+	</mappers>
+</configuration>
+
+

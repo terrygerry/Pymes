@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dawi">
+	<select id="idListaMarca" resultType="MarcaDTOIbatis">
+		SELECT
+		cod_mar as codigo,
+		nom_mar as nombre 
+		FROM tb_marca
+	</select>
+</mapper>
+

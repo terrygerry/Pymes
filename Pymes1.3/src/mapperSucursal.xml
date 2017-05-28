@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dawi">
+	<select id="idListaSucursal" resultType="SucursalDTOIbatis">
+		SELECT cod_sucursal as codigo,nom_sucursal as nombre from tb_sucursal
+	</select>
+</mapper>
+

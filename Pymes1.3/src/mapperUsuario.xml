@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dawi">
+	<select id="SQL_traerEnlacesDeUsuario" 
+							parameterType="java.lang.String"
+							resultType="EnlaceDTOIbatis">
+			SELECT DISTINCT
+					r.idenlace,
+					r.descripcion,
+					r.ruta
+			FROM
+					ENLACE r,
+					ROL_ENLACE p,
+					ROL t,
+					USUARIO_ROL q
+			WHERE
+					r.idenlace = p.idenlace AND
+					p.idrol = t.idrol AND
+					t.idrol = q.idrol AND
+					q.idusuario = #{idusuario}
+			ORDER BY 2	 					
+	</select>
+	
+	<select id="SQL_login" 	parameterType="UsuarioDTOIbatis" 
+						    resultType="UsuarioDTOIbatis">
+			select idusuario,nombres,apellidos from 
+			usuario where login=#{login} and password=#{password}	
+	</select>
+</mapper>
+
+
+
