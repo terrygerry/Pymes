@@ -64,10 +64,10 @@ function processFiles(files) {
 					<s:select 	name=""
 						list="#{'1':'Inmobiliario','2':'Mobiliario'}"
 						headerKey=""
-						headerValue="[Seleccione]" id="cboTipoActivo">
+						headerValue="[Seleccione]" id="cboTipoActivo" >
 					</s:select>
 				</div>
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onchange="de()">NUEVO</button>
+				<button type="button" id="btnNuevo" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onchange="de()">NUEVO</button>
 	</s:form>
 	<div class="container">
   <!-- Modal -->
@@ -78,7 +78,7 @@ function processFiles(files) {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
+          <h4 class="modal-title" id="titulo"></h4>
         </div>
         <div class="modal-body">
           <s:form id="idRegistra"  method="post"  action="registrarBienes" 
@@ -89,73 +89,169 @@ function processFiles(files) {
 									<div class="panel-heading">
 										<h4 class="panel-title">
 											<a data-toggle="collapse" data-parent="#steps"
-												href="#stepOne" >Registro de Bien</a>
+												href="#stepOne" >Registro de Activo</a>
 										</h4>
 									</div>
 									<div id="stepOne" class="panel-collapse collapse in">
 										<div class="panel-body">
 											<fieldset>
-<!-- 				                                <div class="form-group"> -->
-<!-- 												        <label class="col-xs-3 control-label">Fecha de Adq.</label> -->
-<!-- 												        <div class="col-xs-5 date"> -->
-<!-- 												            <div class="input-group input-append date" id="datePicker"> -->
-<!-- 												                <input type="text" class="form-control" name="empleado.fechaNacimiento"/> -->
-<%-- 												                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span> --%>
-<!-- 												            </div> -->
-<!-- 												        </div> -->
-<!-- 												    </div>	 -->
-				                                <label class="col-lg-3 control-label">Nombre del Prov.</label>
+				                                
+				                                <label class="col-lg-3 control-label">Nombre </label>
 				                                <div class="col-lg-7">
-				                                    <s:textfield 	name="" id="" />
+				                                    <s:textfield 	name="activo.nombre" id="txtNombre" />
 				                                </div>
-				                                <label class="col-lg-3 control-label">Numero de Fact.</label>
+				                                <label class="col-lg-3 control-label">Costo</label>
 				                                <div class="col-lg-7">
-				                                    <s:textfield 	name="" id="" />
+				                                    <s:textfield 	name="activo.centroCosto" id="txtCosto" />
 				                                </div>
-				   								<label class="col-lg-3 control-label">Tipo de Bien</label>
+				                                <label class="col-lg-3 control-label">Grupo</label>
 				                                <div class="col-lg-7">
-				                                    <s:select 	name=""
-														list="#{}"
+				                                    <s:textfield 	name="activo.grupo" id="txtGrupo" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Ubicacion</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.ubicacion" id="txtUbicacion" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Responsable</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.responsable" id="txtResponsable" />
+				                                </div>
+				   								<label class="col-lg-3 control-label">Proveedor</label>
+				                                <div class="col-lg-7">
+				                                    <s:select 	name="activo.idproveedor" id="cboProveedor"
+														list="listaProveedor"
+														listKey="codPro"
+														listValue="nomPro"
 														headerKey=" "
-														headerValue="[Seleccione]" id="" >
+														headerValue="[Seleccione]" cssStyle="width:200px">
 													</s:select>
 				                                </div>
-				                                <label class="col-lg-3 control-label">Descrip. del Bien</label>
+				                                <label class="col-lg-3 control-label">Marca</label>
 				                                <div class="col-lg-7">
-				                                    <s:textarea 	name="" id="" />
+				                                    <s:textarea 	name="activo.marca" id="txtMarca" />
 				                                </div>
-				                                <label class="col-lg-3 control-label">Unidad de Medida</label>
+				                                <label class="col-lg-3 control-label">Modelo</label>
 				                                <div class="col-lg-7">
-				                                    <s:textfield 	name="" id="" />
+				                                    <s:textfield 	name="activo.modelo" id="txtModelo" />
 				                                </div>
-				                                <label class="col-lg-3 control-label">Valor de Adq.</label>
+				                                <label class="col-lg-3 control-label">Serie</label>
 				                                <div class="col-lg-7">
-				                                    <s:textfield 	name="" id="" />
+				                                    <s:textfield 	name="activo.serie" id="txtSerie" />
 				                                </div>
-				                                <label class="col-lg-3 control-label">Estado Fisico</label>
-				                                <div class="col-lg-7">
-				                                    <s:select 	name=""
-														list="#{}"
-														headerKey=" "
-														headerValue="[Seleccione]" id="" >
-													</s:select>
+				                                <label class="col-lg-3 control-label" id="lblPlaca">Placa</label>
+				                                <div class="col-lg-7" id="divPlaca">
+				                                    <s:textfield 	name="activo.placa" id="txtPlaca" />
 				                                </div>
-				                                <label class="col-lg-3 control-label">Ubi.Fisi. del Bien</label>
+				                                <label class="col-lg-3 control-label">Codigo Barra</label>
 				                                <div class="col-lg-7">
-				                                    <s:textfield 	name="" id="" />
+				                                    <s:textfield 	name="activo.codigoBarra" id="txtCodigoBarra" />
 				                                </div>
-				                                <label class="col-lg-3 control-label">Codigo segun Empresa</label>
+				                               <div class="form-group">
+												        <label class="col-xs-3 control-label">Fecha Compra</label>
+												        <div class="col-xs-5 date">
+												            <div class="input-group input-append date" id="datePicker">
+																
+												                <input type="text" class="form-control" name="activo.fechaCompra"/>
+												                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+												            </div>
+												        </div>
+												    </div>
+				                                <label class="col-lg-3 control-label">Valor Compra</label>
 				                                <div class="col-lg-7">
-				                                    <s:textfield name="" id="" disabled="true" />
+				                                    <s:textfield 	name="activo.valorComprar" id="txtValorCompra" />
 				                                </div>
-				                                <label class="col-lg-3 control-label">Persona Respo. del Bien</label>
+				                                <label class="col-lg-3 control-label">Garantia</label>
 				                                <div class="col-lg-7">
-				                                    <s:textfield 	name="" id="" />
+				                                    <s:textfield 	name="activo.garantia" id="txtGarantia" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Vence Garantia</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.venceGarantia" id="txtVenceGarantia" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Vida Util</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.vidaUtil" id="txtvidaUtil" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Nro Poliza</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.polizanro" id="txtPoliza" />
+				                                </div>
+				                               <div class="form-group">
+												        <label class="col-xs-3 control-label">Fecha </label>
+												        <div class="col-xs-5 date">
+												            <div class="input-group input-append date" id="datePicker2">
+																
+												                <input type="text" class="form-control" name="activo.fecha"/>
+												                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+												            </div>
+												        </div>
+												    </div>
+				                                <label class="col-lg-3 control-label">Vence Poliza</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.vencePoliza" id="txtVencePoliza" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Aseguradora</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.aseguradora" id="txtAseguradora" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Agente</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.agente" id="txtAgente" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Valor Asegurador</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.valorAsegurado" id="txtValorAsegurado" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Prima Anual</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.primaAnual" id="txtPrimaAnual" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Prima Mensual</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.primaMensual" id="txtPrimaMensual" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Deducible</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.deducible" id="txtDeducible" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Telefono Agente</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.telefonoAgente" id="txtTelefonoAg" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Dept Solicitante</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.deptSolic" id="txtDept" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Nombre Solicitante</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.nombSolic" id="txtNombSolic" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Destino</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.destino" id="txtDestino" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Fecha Salida</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.fechaSalida" id="txtFechaSalida" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Condiciones</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="activo.condiciones" id="txtCondicion" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Observacion</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield name="activo.observacion" id="txtObservacion" />
+				                                </div>
+				                                <label class="col-lg-3 control-label">Tipo Activo</label>
+				                                <div class="col-lg-7">
+				                                    <s:textfield 	name="idTipo_Activo" id="txtTipoActivo" />
 				                                </div>                                           
 				                            	<div class="col-lg-9 col-lg-offset-3">
 				                            		<s:submit id="s" cssClass="btn btn-primary" name="Registrar" value="Registrar"/>
+				                            		<s:a href="listBienes.jsp"><button type="button" class="btn btn-primary">Salir</button></s:a>
 				                            	</div> 
-                                			</fieldset>
+                                			</fieldset>            
+
 									     </div>
 									   </div>
 									</div>
@@ -185,51 +281,96 @@ function processFiles(files) {
                 </div>
             </section>
             <!-- :form -->
-               <div class="panel-body">
+            <s:form>
+            	<div class="panel-body">
                        
                       <div class="dataTable_wrapper">
-                        <s:a href="addBienes.jsp"><button type="button" class="btn btn-outline btn-success btn-lg btn-block">NUEVO REGISTRO DE BIENES</button></s:a><br>
-                         
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                    
                                         <tr>
-                                            <td>Fecha de Adq.</td>
-											<td>Nombre Prov.</td>
-											<td>Numero Fact.</td>
-											<td>Tipo de Bien</td>
-											<td>Descr. del Bien</td>
-											<td>Unidad de Medi.</td>
-											<td>Valor de Adq.</td>
-											<td>Estado Fisico</td>
-											<td>Ubi.Fis del Bien</td>
-											<td>Codigo</td>
-											<td>Empleado</td>
-                                            
-                                       <th>Operaciones</th>
+                                        	<td>idactivo</td>
+                                        	<td>nombre</td>
+                                        	<td>centroCosto</td>
+                                        	<td>grupo</td>
+                                        	<td>ubicacion</td>
+                                        	<td>responsable</td>
+                                        	<td>idproveedor</td>
+                                        	<td>marca</td>
+                                        	<td>modelo</td>
+                                        	<td>serie</td>
+                                        	<td>placa</td>
+                                        	<td>codigoBarra</td>
+                                        	<td>fechaCompra</td>
+                                        	<td>valorComprar</td>
+                                        	<td>garantia</td>
+                                        	<td>venceGarantia</td>
+                                        	<td>vidaUtil</td>
+                                        	<td>polizanro</td>
+                                        	<td>fecha</td>
+                                        	<td>vencePoliza</td>
+                                        	<td>aseguradora</td>
+                                        	<td>agente</td>
+                                        	<td>valorAsegurado</td>
+                                        	<td>primaAnual</td>
+                                        	<td>primaMensual</td>
+                                        	<td>deducible</td>
+                                        	<td>telefonoAgente</td>
+                                        	<td>deptSolic</td>
+                                        	<td>nombSolic</td>
+                                        	<td>destino</td>
+                                        	<td>fechaSalida</td>
+                                        	<td>condiciones</td>
+                                        	<td>observacion</td>
+                                        	<td>idTipo_Activo</td>
+                                       		<th>Operaciones</th>
                                         </tr>
                                     </thead>
                                     
                                     <tbody>
-                                  <!--
-                                       <s:iterator value="listaEmpleado">
-                                      	 <s:url id="idEliminar" action="eliminarEmpleado">
-				 							<s:param name="empleado.codigo" value="codigo"/>
-				 						 </s:url>
-				 						 <s:url id="idBuscar" action="buscarEmpleado">
-				 							<s:param name="empleado.codigo" value="codigo"/>
-										 </s:url>
+                                       <s:iterator value="listarActivo">
+<!--                                       	 <s:url id="idEliminar" action="eliminarEmpleado"> -->
+<!-- 				 							<s:param name="empleado.codigo" value="codigo"/> -->
+<!-- 				 						 </s:url> -->
+<!-- 				 						 <s:url id="idBuscar" action="buscarEmpleado"> -->
+<!-- 				 							<s:param name="empleado.codigo" value="codigo"/> -->
+<!-- 										 </s:url> -->
                                         <tr>
-                                         <td><s:property value="codigo" /></td>
-                                         <td><s:property value="nombre" /></td>
-                                         <td><s:property value="apellido" /></td>
-                                         <td><s:property value="sexo" /></td>
-                                         <td><s:property value="dni" /></td>
-                                         <td><s:property value="cargo" /></td>
-                                         <td><s:property value="fechaNacimiento" /></td>
-                                         <td><s:property value="fechaRegistro" /></td>
-                                         <td><s:property value="nomSucursal" /></td>
+                                        	<td><s:property value="idactivo"/></td>
+                                        	<td><s:property value="nombre"/></td>
+                                        	<td><s:property value="centroCosto"/></td>
+                                        	<td><s:property value="grupo"/></td>
+                                        	<td><s:property value="ubicacion"/></td>
+                                        	<td><s:property value="responsable"/></td>
+                                        	<td><s:property value="idproveedor"/></td>
+                                        	<td><s:property value="marca"/></td>
+                                        	<td><s:property value="modelo"/></td>
+                                        	<td><s:property value="serie"/></td>
+                                        	<td><s:property value="placa"/></td>
+                                        	<td><s:property value="codigoBarra"/></td>
+                                        	<td><s:property value="fechaCompra"/></td>
+                                        	<td><s:property value="valorComprar"/></td>
+                                        	<td><s:property value="garantia"/></td>
+                                        	<td><s:property value="venceGarantia"/></td>
+                                        	<td><s:property value="vidaUtil"/></td>
+                                        	<td><s:property value="polizanro"/></td>
+                                        	<td><s:property value="fecha"/></td>
+                                        	<td><s:property value="vencePoliza"/></td>
+                                        	<td><s:property value="aseguradora"/></td>
+                                        	<td><s:property value="agente"/></td>
+                                        	<td><s:property value="valorAsegurado"/></td>
+                                        	<td><s:property value="primaAnual"/></td>
+                                        	<td><s:property value="primaMensual"/></td>
+                                        	<td><s:property value="deducible"/></td>
+                                        	<td><s:property value="telefonoAgente"/></td>
+                                        	<td><s:property value="deptSolic"/></td>
+                                        	<td><s:property value="nombSolic"/></td>
+                                        	<td><s:property value="destino"/></td>
+                                        	<td><s:property value="fechaSalida"/></td>
+                                        	<td><s:property value="condiciones"/></td>
+                                        	<td><s:property value="observacion"/></td>
+                                        	<td><s:property value="idTipo_Activo"/></td>
                                          <td align="center">	
                                            	<s:a href="%{idBuscar}">
                                             	<button type="button" class="glyphicon glyphicon-pencil"><i class="fa fa-check"></i></button>
@@ -238,12 +379,14 @@ function processFiles(files) {
                                             	<button type="button" class="glyphicon glyphicon-remove" ><i class="fa fa-times"></i></button>
                                             </s:a>
                                         </tr>
-                                    </s:iterator>  -->
+                                    </s:iterator>
                                     </tbody>
                                 </table>
                                 </div>
                             </div>
+                    
                     </div>
+            </s:form>
         </div>
         
         
@@ -260,7 +403,24 @@ function processFiles(files) {
     <script type="text/javascript">
     $(document).ready(function() {
     	
-    	
+    	$("#cboTipoActivo").change(function(){
+            var options = document.getElementById("cboTipoActivo").options; 
+            var selectedIndex = document.getElementById("cboTipoActivo").selectedIndex; 
+            var selectedOptionText = options[selectedIndex].text;
+            var selectedOptionValue = options[selectedIndex].value;
+            
+            if(selectedOptionValue==1){
+            document.getElementById('titulo').innerHTML="Registro NO Activo";
+			$("#divPlaca").hide();            
+			$("#lblPlaca").hide();
+            }else{
+            	document.getElementById('titulo').innerHTML="Registro Activo";
+            	$("#divPlaca").show();            
+    			$("#lblPlaca").show();
+            }
+            console.log("Id of selected option is: " + selectedOptionValue);
+            console.log("Text of selected option is: " + selectedOptionText);   
+        });	
     	
 //     	$('#datePicker')
 //         .datepicker({
