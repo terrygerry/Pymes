@@ -2,6 +2,7 @@ package beans;
 
 public class ActivoDTO {
 	
+	//dasdasdasda
 	private int idactivo;
 	private String nombre;
 	private int centroCosto;
